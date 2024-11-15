@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnptuf8iu1tey"]
+
+[ext_resource type="Texture2D" uid="uid://cg2fxeh7d0bfa" path="res://game_assets/player/mirror.png" id="1_x136t"]
+[ext_resource type="Script" path="res://game_assets/player/mirror.gd" id="2_nr3vm"]
+[ext_resource type="AudioStream" uid="uid://kdywc5n887t3" path="res://assets/sfx/pickupCoin.wav" id="3_gktky"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irowo"]
+radius = 5.0
+height = 24.0
+
+[node name="Mirror" type="Sprite2D"]
+texture = ExtResource("1_x136t")
+script = ExtResource("2_nr3vm")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(3.83693e-13, -7)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_irowo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gktky")
+bus = &"sfx"

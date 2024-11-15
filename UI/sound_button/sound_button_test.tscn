@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ovdi07b0rar"]
+
+[ext_resource type="PackedScene" uid="uid://jyv0manw12fd" path="res://GUI/sound_button/sound_button.tscn" id="1_j85xi"]
+
+[node name="ButtonTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SoundButton" parent="." instance=ExtResource("1_j85xi")]
+layout_mode = 1
+offset_left = 38.0
+offset_top = 40.0
+offset_right = -234.0
+offset_bottom = -122.0
+
+[node name="SoundButton2" parent="." instance=ExtResource("1_j85xi")]
+layout_mode = 1
+offset_left = 39.0
+offset_top = 65.0
+offset_right = -233.0
+offset_bottom = -97.0

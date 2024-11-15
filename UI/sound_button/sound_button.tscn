@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://jyv0manw12fd"]
+
+[ext_resource type="Theme" uid="uid://b2w5lw0sv5ge6" path="res://game_assets/theme/custom_theme.tres" id="1_2klk0"]
+[ext_resource type="AudioStream" uid="uid://bhj3stk6oqs03" path="res://assets/sfx/click.wav" id="2_feshx"]
+[ext_resource type="Script" path="res://UI/sound_button/sound_button.gd" id="2_iv123"]
+[ext_resource type="AudioStream" uid="uid://cfjpsnclqcq4f" path="res://assets/sfx/blipSelect.wav" id="4_s0fa6"]
+
+[node name="SoundButton" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2klk0")
+text = "Button"
+script = ExtResource("2_iv123")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_feshx")
+bus = &"sfx"
+
+[node name="Focus" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_s0fa6")
+volume_db = -15.0
+bus = &"sfx"

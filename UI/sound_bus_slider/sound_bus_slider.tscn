@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1gx7fhq2bnt2"]
+
+[ext_resource type="Script" path="res://UI/sound_bus_slider/sfx_slider.gd" id="1_3snd1"]
+[ext_resource type="Theme" uid="uid://b2w5lw0sv5ge6" path="res://game_assets/theme/custom_theme.tres" id="2_mbpr2"]
+
+[node name="SoundBusSlider" type="Control"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.111
+offset_bottom = 0.0199986
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3snd1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_mbpr2")
+text = "Sound effects:"
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_mbpr2")
+max_value = 10.0
+
+[node name="Value" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme = ExtResource("2_mbpr2")
+text = "0"
+horizontal_alignment = 1
+
+[node name="TestSound" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"

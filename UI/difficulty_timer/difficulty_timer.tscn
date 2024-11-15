@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3jccjf72ao6t"]
+
+[ext_resource type="Script" path="res://UI/difficulty_timer/difficulty_timer.gd" id="1_bv56f"]
+[ext_resource type="Texture2D" uid="uid://cm1q6fao3ea48" path="res://assets/GUI/GUI.png" id="2_j41lm"]
+[ext_resource type="Theme" uid="uid://b2w5lw0sv5ge6" path="res://game_assets/theme/custom_theme.tres" id="3_u5vd8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2v7my"]
+atlas = ExtResource("2_j41lm")
+region = Rect2(210, 7, 90, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_entrx"]
+atlas = ExtResource("2_j41lm")
+region = Rect2(210, 38, 86, 17)
+
+[node name="DifficultyTimer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bv56f")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 36.0
+offset_top = 6.0
+offset_right = 76.0
+offset_bottom = 29.0
+theme = ExtResource("3_u5vd8")
+text = "1:00"
+horizontal_alignment = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 88.0
+offset_bottom = 19.0
+value = 100.0
+texture_under = SubResource("AtlasTexture_2v7my")
+texture_progress = SubResource("AtlasTexture_entrx")
+texture_progress_offset = Vector2(2, 1)
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 31.0
+offset_bottom = 21.0
+theme = ExtResource("3_u5vd8")
+text = "lv 1"

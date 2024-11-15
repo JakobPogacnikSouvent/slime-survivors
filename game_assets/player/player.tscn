@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr70kttr3mlhc"]
+
+[ext_resource type="Texture2D" uid="uid://bjmv0et3orhr8" path="res://game_assets/player/player.png" id="1_fhh63"]
+[ext_resource type="Script" path="res://game_assets/player/player.gd" id="1_xdpwf"]
+[ext_resource type="PackedScene" uid="uid://bnptuf8iu1tey" path="res://game_assets/player/mirror.tscn" id="3_w252a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7pyg"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_xdpwf")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w7pyg")
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("1_fhh63")
+
+[node name="Mirror" parent="." instance=ExtResource("3_w252a")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="DashCooldown" type="Timer" parent="."]
+one_shot = true

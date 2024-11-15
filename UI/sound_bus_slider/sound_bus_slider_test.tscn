@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bavgo83phfnsd"]
+
+[ext_resource type="PackedScene" uid="uid://d1gx7fhq2bnt2" path="res://UI/sound_bus_slider/sound_bus_slider.tscn" id="1_w58g4"]
+[ext_resource type="AudioStream" uid="uid://cfjpsnclqcq4f" path="res://assets/sfx/blipSelect.wav" id="2_f3sf7"]
+
+[node name="SfxSliderTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SoundBusSlider" parent="." instance=ExtResource("1_w58g4")]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 67.0
+offset_right = 1.0
+offset_bottom = 67.02
+bus_name = "sfx"
+test_sound = ExtResource("2_f3sf7")

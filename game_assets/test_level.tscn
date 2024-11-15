@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://mto1hoyl2tel"]
+
+[ext_resource type="PackedScene" uid="uid://dr70kttr3mlhc" path="res://game_assets/player/player.tscn" id="1_57wwk"]
+[ext_resource type="Texture2D" uid="uid://ca35wvphg0xvc" path="res://assets/placeholder/Title_Image_Edit.png" id="2_0jxo8"]
+[ext_resource type="PackedScene" uid="uid://in7djvbhqk8c" path="res://game_assets/projectile/projectile.tscn" id="3_usng3"]
+[ext_resource type="PackedScene" uid="uid://dkhjgq1d4fpgw" path="res://game_assets/enemies/basic_enemy/basic_enemy.tscn" id="4_idop1"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="TitleImageEdit" type="Sprite2D" parent="."]
+position = Vector2(151, 82)
+scale = Vector2(0.288195, 0.288194)
+texture = ExtResource("2_0jxo8")
+
+[node name="Player" parent="." instance=ExtResource("1_57wwk")]
+position = Vector2(142, 73)
+
+[node name="Projectile" parent="." instance=ExtResource("3_usng3")]
+position = Vector2(184, 89)
+SPEED = null
+damage = null
+
+[node name="Enemy" parent="." instance=ExtResource("4_idop1")]
+position = Vector2(140, 126)
