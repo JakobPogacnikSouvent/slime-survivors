@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://cirme5ifwxjrc"]
+
+[ext_resource type="Script" path="res://UI/main_menu/settings_menu.gd" id="1_0yxhs"]
+[ext_resource type="Theme" uid="uid://b2w5lw0sv5ge6" path="res://game_assets/theme/custom_theme.tres" id="2_imjim"]
+[ext_resource type="PackedScene" uid="uid://d1gx7fhq2bnt2" path="res://UI/sound_bus_slider/sound_bus_slider.tscn" id="3_hwudn"]
+[ext_resource type="AudioStream" uid="uid://bhj3stk6oqs03" path="res://assets/sfx/click.wav" id="4_emtdo"]
+[ext_resource type="PackedScene" uid="uid://jyv0manw12fd" path="res://UI/sound_button/sound_button.tscn" id="5_2dk7u"]
+
+[node name="SettingsMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0yxhs")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_imjim")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="SoundBusSlider" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" instance=ExtResource("3_hwudn")]
+layout_mode = 2
+size_flags_vertical = 3
+bus_name = "music"
+
+[node name="SoundBusSlider2" parent="MarginContainer/Panel/MarginContainer/VBoxContainer" instance=ExtResource("3_hwudn")]
+layout_mode = 2
+size_flags_vertical = 3
+bus_name = "sfx"
+test_sound = ExtResource("4_emtdo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_2dk7u")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back
+"

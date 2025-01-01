@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3jccjf72ao6t"]
+[gd_scene load_steps=7 format=3 uid="uid://c3jccjf72ao6t"]
 
 [ext_resource type="Script" path="res://UI/difficulty_timer/difficulty_timer.gd" id="1_bv56f"]
 [ext_resource type="Texture2D" uid="uid://cm1q6fao3ea48" path="res://assets/GUI/GUI.png" id="2_j41lm"]
 [ext_resource type="Theme" uid="uid://b2w5lw0sv5ge6" path="res://game_assets/theme/custom_theme.tres" id="3_u5vd8"]
+[ext_resource type="AudioStream" uid="uid://cj2svbuma58ct" path="res://UI/difficulty_timer/powerUp (1).wav" id="4_6u4wx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2v7my"]
 atlas = ExtResource("2_j41lm")
@@ -53,3 +54,8 @@ offset_right = 31.0
 offset_bottom = 21.0
 theme = ExtResource("3_u5vd8")
 text = "lv 1"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6u4wx")
+volume_db = -5.0
+bus = &"sfx"

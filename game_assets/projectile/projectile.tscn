@@ -1,29 +1,89 @@
-[gd_scene load_steps=5 format=3 uid="uid://in7djvbhqk8c"]
+[gd_scene load_steps=13 format=3 uid="uid://in7djvbhqk8c"]
 
 [ext_resource type="Script" path="res://game_assets/projectile/projectile.gd" id="1_tbukm"]
-[ext_resource type="Texture2D" uid="uid://b7nsbfm07kvtl" path="res://assets/bullet_effects/Fire Effect and Bullet 16x16.png" id="2_olne2"]
+[ext_resource type="Texture2D" uid="uid://bdkprwscsfhk" path="res://game_assets/projectile/projectile_2.png" id="2_2cypq"]
+[ext_resource type="Texture2D" uid="uid://dl05ye22voe62" path="res://game_assets/projectile/big_projectile.png" id="3_ituop"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0w65y"]
-atlas = ExtResource("2_olne2")
-region = Rect2(322, 101, 12, 6)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3frhr"]
+atlas = ExtResource("2_2cypq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmyba"]
+atlas = ExtResource("2_2cypq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3v8a"]
+atlas = ExtResource("2_2cypq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lfgbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3frhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmyba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3v8a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0b3on"]
+atlas = ExtResource("3_ituop")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onnwr"]
+atlas = ExtResource("3_ituop")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1efwk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0b3on")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onnwr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhmcp"]
 radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlpl3"]
+radius = 5.0
 
 [node name="Projectile" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_tbukm")
-SPEED = null
-damage = null
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SmallSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3, 0)
-texture = SubResource("AtlasTexture_0w65y")
+sprite_frames = SubResource("SpriteFrames_lfgbn")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="BigSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, 0)
+sprite_frames = SubResource("SpriteFrames_1efwk")
+
+[node name="SmallArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallArea"]
 shape = SubResource("CircleShape2D_bhmcp")
+
+[node name="BigArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigArea"]
+shape = SubResource("CircleShape2D_dlpl3")

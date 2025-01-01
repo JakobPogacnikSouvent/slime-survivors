@@ -2,7 +2,6 @@ class_name AbstractEnemy
 extends CharacterBody2D
 
 @export var speed : int
-@export var credit_cost : int
 @export var spawning_weight : float
 @export var max_hp : int
 @export var score : int
@@ -41,3 +40,4 @@ func take_damage(dmg : int, direction : Vector2) -> void:
 
 func die(direction : Vector2) -> void:
 	GameManager.score += score
+	GameManager.kills += 1

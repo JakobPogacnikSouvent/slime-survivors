@@ -1,19 +1,48 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkhjgq1d4fpgw"]
+[gd_scene load_steps=16 format=3 uid="uid://dkhjgq1d4fpgw"]
 
 [ext_resource type="Script" path="res://game_assets/enemies/basic_enemy/basic_enemy.gd" id="1_6jx14"]
-[ext_resource type="Texture2D" uid="uid://ba12uj4jmehxy" path="res://game_assets/enemies/basic_enemy/enemy.png" id="2_r5lsh"]
+[ext_resource type="Texture2D" uid="uid://deyfn0kdav0vw" path="res://game_assets/enemies/basic_enemy/enemy_2-Sheet.png" id="2_4rjtu"]
 [ext_resource type="AudioStream" uid="uid://cwpakintpw7jw" path="res://assets/sfx/hitHurt.wav" id="3_ik0c1"]
 [ext_resource type="Theme" uid="uid://b2w5lw0sv5ge6" path="res://game_assets/theme/custom_theme.tres" id="4_os5et"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyxxv"]
-size = Vector2(16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb8us"]
+atlas = ExtResource("2_4rjtu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yndam"]
+atlas = ExtResource("2_4rjtu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfa0j"]
+atlas = ExtResource("2_4rjtu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o8epv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mb8us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yndam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfa0j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g143o"]
+radius = 8.0
 
 [sub_resource type="Animation" id="Animation_m1fq7"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/path = NodePath("Sprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -81,13 +110,25 @@ tracks/5/keys = {
 "points": PackedFloat32Array(-7, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_1sm7i"]
 resource_name = "die"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/path = NodePath("Sprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -170,10 +211,41 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.866667, 1)
 }
 
+[sub_resource type="Animation" id="Animation_k2fbd"]
+resource_name = "shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_projectile"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pihgv"]
 _data = {
 "RESET": SubResource("Animation_m1fq7"),
-"die": SubResource("Animation_1sm7i")
+"die": SubResource("Animation_1sm7i"),
+"shoot": SubResource("Animation_k2fbd")
 }
 
 [sub_resource type="Curve" id="Curve_83k7m"]
@@ -189,20 +261,20 @@ collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_6jx14")
 speed = 500
-credit_cost = 1
 spawning_weight = 1.0
 max_hp = 1
-score = 100
+score = 10
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_r5lsh")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o8epv")
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dyxxv")
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_g143o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

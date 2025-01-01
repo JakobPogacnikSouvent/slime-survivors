@@ -9,18 +9,21 @@ func _init() -> void:
 	array = []
 
 
-func get_random():
+func pop_random():
 	var total = _sum_weights()
 	var random = randf_range(0, total)
 	
-	for i in array:
-		var weight = i[1]
-		if weight >= total:
-			return i[0]
+	for i in range(len(array)):
+		var item = array[i]
+		var weight = item[1]
+		if weight >= random:
+			array.remove_at(i)
+			return item[0]
 		else:
-			total -= weight
+			random -= weight
 	
-	return array[-1][0]
+	var item = array.pop_back()
+	return item[0]
 
 
 func append(item, weight : float) -> void:

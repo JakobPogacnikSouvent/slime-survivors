@@ -17,8 +17,6 @@ position = Vector2(142, 73)
 
 [node name="Projectile" parent="." instance=ExtResource("3_usng3")]
 position = Vector2(184, 89)
-SPEED = null
-damage = null
 
 [node name="Enemy" parent="." instance=ExtResource("4_idop1")]
 position = Vector2(140, 126)

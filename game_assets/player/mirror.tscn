@@ -1,26 +1,125 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnptuf8iu1tey"]
+[gd_scene load_steps=11 format=3 uid="uid://bnptuf8iu1tey"]
 
-[ext_resource type="Texture2D" uid="uid://cg2fxeh7d0bfa" path="res://game_assets/player/mirror.png" id="1_x136t"]
+[ext_resource type="Texture2D" uid="uid://coxieprkmunbt" path="res://game_assets/player/mirror_2.png" id="1_b7o44"]
 [ext_resource type="Script" path="res://game_assets/player/mirror.gd" id="2_nr3vm"]
 [ext_resource type="AudioStream" uid="uid://kdywc5n887t3" path="res://assets/sfx/pickupCoin.wav" id="3_gktky"]
+[ext_resource type="AudioStream" uid="uid://cfo6dppnvb4to" path="res://game_assets/player/powerUp.wav" id="4_141kh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irowo"]
-radius = 5.0
-height = 24.0
+radius = 4.0
+height = 22.0
 
-[node name="Mirror" type="Sprite2D"]
-texture = ExtResource("1_x136t")
+[sub_resource type="Animation" id="Animation_4f03y"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_i6dsl"]
+resource_name = "deflect"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-12, -0.25, 0, 0.0666667, 0, -8, -0.0333333, 8, 0.0333333, -1, -12, 0, -1, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.266667)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blap1"]
+_data = {
+"RESET": SubResource("Animation_4f03y"),
+"deflect": SubResource("Animation_i6dsl")
+}
+
+[sub_resource type="Curve" id="Curve_fbmuj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lt2eu"]
+offsets = PackedFloat32Array(0.433333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="Mirror" type="Node2D"]
 script = ExtResource("2_nr3vm")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_b7o44")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gktky")
+bus = &"sfx"
+
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -11)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(3.83693e-13, -7)
+position = Vector2(0, 3)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_irowo")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_gktky")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_blap1")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -9)
+emitting = false
+amount = 20
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.5
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_fbmuj")
+color = Color(0.470588, 0.623529, 0.858824, 1)
+color_ramp = SubResource("Gradient_lt2eu")
+
+[node name="FullyCharged" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_141kh")
 bus = &"sfx"

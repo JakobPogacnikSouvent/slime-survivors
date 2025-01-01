@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://dwkgu6ehn7foy"]
+[gd_scene load_steps=23 format=4 uid="uid://dwkgu6ehn7foy"]
 
 [ext_resource type="Script" path="res://game_assets/level/main_level.gd" id="1_aim8c"]
 [ext_resource type="PackedScene" uid="uid://c3jccjf72ao6t" path="res://UI/difficulty_timer/difficulty_timer.tscn" id="1_ixu8b"]
@@ -8,10 +8,12 @@
 [ext_resource type="Shader" path="res://game_assets/level/main_level.gdshader" id="2_r1h6k"]
 [ext_resource type="Texture2D" uid="uid://c3scj65pugh66" path="res://assets/tileset/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="5_selnb"]
 [ext_resource type="PackedScene" uid="uid://dmfc3ihay7ylp" path="res://UI/pause_menu/pause_menu.tscn" id="6_wlyf5"]
-[ext_resource type="AudioStream" uid="uid://duxsi0jlor03x" path="res://assets/music/One Man Symphony - Downtempo & Lofi & Progressive Music Pack Vol - 2 (Free)/One Man Symphony - Downtempo & Lofi & Progressive Music Pack Vol - 2 (Free) - 01 Reflection Of Familiar Faces.mp3" id="7_4jwhl"]
+[ext_resource type="AudioStream" uid="uid://duxsi0jlor03x" path="res://assets/music/One Man Symphony - Downtempo & Lofi & Progressive Music Pack Vol - 2 (Free) - 01 Reflection Of Familiar Faces.mp3" id="7_4jwhl"]
 [ext_resource type="PackedScene" uid="uid://wo2i0jbhkpnt" path="res://UI/player_hp/player_hp.tscn" id="7_lwn6y"]
+[ext_resource type="PackedScene" uid="uid://ddxvya8e4px6d" path="res://UI/death_menu/death_menu.tscn" id="8_85k63"]
+[ext_resource type="PackedScene" uid="uid://ktmqf7obgqh3" path="res://UI/tutorial_menu/tutorial_menu.tscn" id="12_fe6um"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uwuwx"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjrpp"]
 texture = ExtResource("5_selnb")
 0:0/0 = 0
 1:0/0 = 0
@@ -128,7 +130,7 @@ texture = ExtResource("5_selnb")
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Grass"
 terrain_set_0/terrain_0/color = Color(0.243119, 0.43774, 0.257999, 1)
-sources/0 = SubResource("TileSetAtlasSource_uwuwx")
+sources/0 = SubResource("TileSetAtlasSource_jjrpp")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_as5wl"]
 frequency = 0.0051
@@ -140,6 +142,152 @@ noise = SubResource("FastNoiseLite_as5wl")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edftn"]
 shader = ExtResource("2_r1h6k")
 shader_parameter/noise_img = SubResource("NoiseTexture2D_4ssvp")
+
+[sub_resource type="Animation" id="Animation_yl2je"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rwyff"]
+resource_name = "end_game"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/DeathMenu")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"appear"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"pause"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.501961)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -5.0]
+}
+
+[sub_resource type="Animation" id="Animation_8urxa"]
+resource_name = "fade_in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5u0wb"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-5.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmq2e"]
+_data = {
+"RESET": SubResource("Animation_yl2je"),
+"end_game": SubResource("Animation_rwyff"),
+"fade_in": SubResource("Animation_8urxa"),
+"fade_out": SubResource("Animation_5u0wb")
+}
 
 [node name="MainLevel" type="Node2D"]
 script = ExtResource("1_aim8c")
@@ -170,10 +318,25 @@ offset_bottom = 300.0
 
 [node name="ScoreLabel" parent="CanvasLayer" instance=ExtResource("2_8cch6")]
 
+[node name="PlayerHp" parent="CanvasLayer" instance=ExtResource("7_lwn6y")]
+
+[node name="TutorialMenu" parent="CanvasLayer" instance=ExtResource("12_fe6um")]
+modulate = Color(1, 1, 1, 0.631373)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_wlyf5")]
 visible = false
 
-[node name="PlayerHp" parent="CanvasLayer" instance=ExtResource("7_lwn6y")]
+[node name="DeathMenu" parent="CanvasLayer" instance=ExtResource("8_85k63")]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -189,3 +352,9 @@ process_mode = 3
 stream = ExtResource("7_4jwhl")
 autoplay = true
 bus = &"music"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_wmq2e")
+}

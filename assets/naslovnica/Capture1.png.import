@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi0yrvn2plbpd"
-path="res://.godot/imported/cover.png-a729fa9562fd5f76ceb44e3690b90183.ctex"
+uid="uid://6dser1etx8b8"
+path="res://.godot/imported/Capture1.png-2a797801f13a91503d849223ca2ba763.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/music/One Man Symphony - Downtempo & Lofi & Progressive Music Pack Vol - 2 (Free)/cover.png"
-dest_files=["res://.godot/imported/cover.png-a729fa9562fd5f76ceb44e3690b90183.ctex"]
+source_file="res://assets/naslovnica/Capture1.png"
+dest_files=["res://.godot/imported/Capture1.png-2a797801f13a91503d849223ca2ba763.ctex"]
 
 [params]
 

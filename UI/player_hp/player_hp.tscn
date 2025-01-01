@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://wo2i0jbhkpnt"]
+[gd_scene load_steps=6 format=3 uid="uid://wo2i0jbhkpnt"]
 
-[ext_resource type="Texture2D" uid="uid://cecd5xtl1yphd" path="res://assets/GUI/hp.png" id="1_iacs7"]
 [ext_resource type="Script" path="res://UI/player_hp/player_hp.gd" id="1_x77pw"]
+[ext_resource type="Texture2D" uid="uid://cdh2ma664e0af" path="res://game_assets/player/slime-Sheet.png" id="2_shtdi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctsov"]
+atlas = ExtResource("2_shtdi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wme0"]
+atlas = ExtResource("2_shtdi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tkyj"]
+atlas = ExtResource("2_shtdi")
+region = Rect2(0, 0, 16, 16)
 
 [node name="PlayerHp" type="Control"]
 layout_mode = 3
@@ -26,14 +38,14 @@ grow_horizontal = 0
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
-texture = ExtResource("1_iacs7")
+texture = SubResource("AtlasTexture_ctsov")
 
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
-texture = ExtResource("1_iacs7")
+texture = SubResource("AtlasTexture_5wme0")
 
 [node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
-texture = ExtResource("1_iacs7")
+texture = SubResource("AtlasTexture_8tkyj")
